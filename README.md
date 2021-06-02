@@ -30,7 +30,8 @@ WALLARM_API_TOKEN=$WALLARM_API_TOKEN
 ```
 2. Replace $DVWA_HOST with the actual domain name or IP address (and add a port if you changed it from 80 when running the DVWA docker container)
 3. Replace $WALLARM_API_TOKEN with the actual FAST node token (see how to get it: https://docs.fast.wallarm.com/en/operations/create-node.html)
-4. Run FAST docker container: `docker run --rm --name fast-test-dvwa --env-file=$(pwd)/fast.env -p 8080:8080 wallarm/fast:latest`
+4. Create a Test Run as described here: https://docs.fast.wallarm.com/en/operations/create-testrun.html (select or create your Fast node and mark the "Skip following files extensions" checkbox)
+5. Run FAST docker container: `docker run --rm --name fast-test-dvwa --env-file=$(pwd)/fast.env -p 8080:8080 wallarm/fast:latest`
 
 #### Deploy Moon on Minikube
 You can omit this if you already have a Moon cluster.
@@ -45,3 +46,4 @@ You can omit this if you already have a Moon cluster.
 2. Copy file `config.properties.example` to `config.properties` in the repository root
 3. Edit `config.properties`: modify values with actual addresses of deployed fast_proxy and minikube.
 4. Run the tests: `mvn test` (also, you can open the project in any IDE and run the tests in it)
+
