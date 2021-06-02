@@ -28,3 +28,6 @@ target/
 # IDE configs
 .idea/
 
+# tests config
+config.properties
+

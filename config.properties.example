@@ -1,0 +1,10 @@
+# Config file for tests settings
+# About the format: https://en.wikipedia.org/wiki/.properties
+
+# FAST proxy URL
+fast_proxy.base_url=http://fast_proxy:8080
+
+# Selenium server (localhost, Selenium Grid, Selenoid or Moon).
+# Usually you need to change only hostname and keep port and path as is: ":4444/wd/hub"
+selenium.server_url=http://minikube:4444/wd/hub
+

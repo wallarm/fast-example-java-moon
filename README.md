@@ -42,5 +42,6 @@ You can omit this if you already have a Moon cluster.
 
 #### Run tests
 1. Clone this repo
-2. Edit the config file `config.properties` at the repo root: uncomment lines and modify values with actual addresses of deployed fast_proxy and minikube.
-3. Run the tests: `mvn test` (also, you can open the project in any IDE and run the tests in it)
+2. Copy file `config.properties.example` to `config.properties` in the repository root
+3. Edit `config.properties`: modify values with actual addresses of deployed fast_proxy and minikube.
+4. Run the tests: `mvn test` (also, you can open the project in any IDE and run the tests in it)
