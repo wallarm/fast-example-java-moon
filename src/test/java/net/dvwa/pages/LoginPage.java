@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 public class LoginPage extends AbstractPage {
 
   public LoginPage open() {
-    driver.get(BASE_URL);
+    driver.get(TARGET_APP_BASE_URL);
     driver.waitForPageToLoad();
     return this;
   }
