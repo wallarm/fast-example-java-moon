@@ -2,14 +2,14 @@
 # About the format: https://en.wikipedia.org/wiki/.properties
 
 # Application under test base URL
-target_app.base_url=http://target_webapp_host
+target_app.base_url=http://dvwa
 
 # FAST proxy URL
-fast_proxy.base_url=http://fast_proxy:8080
+fast_proxy.host=fast:80
 
 # FAST proxy mode: 'reverse' if 'true', 'forward' otherwise
 fast_proxy.mode.is_reverse=false
 
 # Selenium server (localhost, Selenium Grid, Selenoid or Moon).
 # Usually you need to change only hostname and keep port and path as is: ":4444/wd/hub"
-selenium.server_url=http://minikube:4444/wd/hub
+selenium.server_url=http://selenium:4444/wd/hub

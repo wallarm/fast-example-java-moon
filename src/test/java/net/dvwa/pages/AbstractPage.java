@@ -7,7 +7,7 @@ public class AbstractPage {
   protected static final String TARGET_APP_BASE_URL;
   static {
     if (Boolean.parseBoolean(Config.get("fast_proxy.mode.is_reverse"))) {
-      TARGET_APP_BASE_URL = Config.get("fast_proxy.base_url");
+      TARGET_APP_BASE_URL = Config.get("fast_proxy.host");
     } else {
       TARGET_APP_BASE_URL = Config.get("target_app.base_url");
     }

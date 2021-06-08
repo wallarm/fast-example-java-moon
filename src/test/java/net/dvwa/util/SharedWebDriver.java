@@ -2,6 +2,7 @@ package net.dvwa.util;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -52,17 +53,14 @@ public class SharedWebDriver extends RemoteWebDriver {
   private static DesiredCapabilities getDefaultDesiredCapabilities() {
     DesiredCapabilities capabilities = new DesiredCapabilities();
 
-    ChromeOptions options = new ChromeOptions();
-    options.addArguments("--dom.max_chrome_script_run_time=150");
-    options.addArguments("--dom.max_script_run_time=150");
-    options.addArguments("--start-maximized");
-    options.addArguments("--disable-gpu");
-    options.addArguments("--disable-notifications");
+//    ChromeOptions options = new ChromeOptions();
+    FirefoxOptions options = new FirefoxOptions();
 
     Boolean isReverseMode = Boolean.parseBoolean(Config.get("fast_proxy.mode.is_reverse"));
     if (!isReverseMode) {
       Proxy proxy = new Proxy();
-      proxy.setHttpProxy(Config.get("fast_proxy.base_url"));
+      String proxy_host = Config.get("fast_proxy.host").replaceFirst("^http://", "");
+      proxy.setHttpProxy(proxy_host);
       options.setCapability("proxy", proxy);
     }
 
@@ -106,7 +104,11 @@ public class SharedWebDriver extends RemoteWebDriver {
     if (driver != null) {
       WEB_DRIVER_HOLDER.remove();
       driver.close();
-      driver.quit();
+      try {
+        driver.quit();
+      } catch (NoSuchSessionException e) {
+        // just ignore it, Firefox fails here, Chrome is OK
+      }
     }
   }
 

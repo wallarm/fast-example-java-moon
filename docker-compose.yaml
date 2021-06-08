@@ -1,0 +1,46 @@
+---
+version: '3.9'
+services:
+  dvwa:
+    image: wallarm/fast-example-dvwa-base
+    networks:
+      main:
+        aliases:
+          - dvwa
+
+  fast:
+    image: wallarm/fast
+    environment:
+      WALLARM_API_TOKEN: ${WALLARM_API_TOKEN}
+      CI_MODE: recording
+      ALLOWED_HOSTS: dvwa
+    networks:
+      main:
+        aliases:
+          - fast
+
+  selenium:
+    image: selenium/standalone-firefox:latest
+    logging:
+      driver: none
+#    environment:
+#      http_proxy: http://fast:80
+    networks:
+      main:
+        aliases:
+          - selenium
+
+  test:
+    build:
+      context: .
+      dockerfile: test.Dockerfile
+    volumes:
+      - type: bind
+        source: .
+        target: /usr/src/mymaven
+    networks:
+      main:
+
+
+networks:
+  main:
