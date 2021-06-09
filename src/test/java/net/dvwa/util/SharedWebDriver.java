@@ -17,9 +17,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class SharedWebDriver extends RemoteWebDriver {
   private static final ThreadLocal<SharedWebDriver> WEB_DRIVER_HOLDER = new ThreadLocal<>();
-  private static final String SELENIUM_SERVER_URL_DEFAULT = "http://minikube:4444/wd/hub";
-  private static final String SELENIUM_SERVER_URL = (String) Config.getConfig().getOrDefault(
-          "selenium.server_url", SELENIUM_SERVER_URL_DEFAULT);
+  private static final String SELENIUM_SERVER_URL = Config.get("selenium.server_url");
   private static final long FIND_ELEMENT_DEFAULT_TIMEOUT = 10;
   private static final long SCRIPT_DEFAULT_TIMEOUT = 30;
   private static final long PAGE_LOAD_DEFAULT_TIMEOUT = 60;
@@ -60,6 +58,14 @@ public class SharedWebDriver extends RemoteWebDriver {
     options.addArguments("--start-maximized");
     options.addArguments("--disable-gpu");
     options.addArguments("--disable-notifications");
+
+    Boolean isReverseMode = Boolean.parseBoolean(Config.get("fast_proxy.mode.is_reverse"));
+    if (!isReverseMode) {
+      Proxy proxy = new Proxy();
+      proxy.setHttpProxy(Config.get("fast_proxy.base_url"));
+      options.setCapability("proxy", proxy);
+    }
+
     capabilities.setCapability(ChromeOptions.CAPABILITY, options);
 
     return capabilities;

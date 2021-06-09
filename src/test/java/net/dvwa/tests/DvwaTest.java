@@ -1,9 +1,9 @@
 package net.dvwa.tests;
 
-import org.testng.annotations.Test;
 import net.dvwa.pages.LoginPage;
 import net.dvwa.pages.MainPage;
 import net.dvwa.pages.SqliPage;
+import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -13,8 +13,8 @@ public class DvwaTest extends AbstractTest {
   public void openLoginPage() {
     LoginPage loginPage = new LoginPage().open();
     assertThat(loginPage.getCurrentPageUrl()).contains(loginPage.getBaseUrl());
-    assertThat(loginPage.getTitle()).contains("Login :: Damn Vulnerable Web Application");
     assertThat(loginPage.getPageSource()).contains("href=\"http://www.dvwa.co.uk/\"");
+    assertThat(loginPage.getTitle()).contains("Login :: Damn Vulnerable Web Application");
   }
 
   @Test(dependsOnMethods = { "openLoginPage" })
